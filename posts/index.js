@@ -1,1 +1,3 @@
-window.blogSlugs = ["2026-08-15", "2026-08-14"];
+// posts/index.js
+
+window.blogSlugs = ["1", "2", "3", "about"];
