@@ -1,1 +1,1 @@
-window.blogSlugs = ["2026-08-14"];
+window.blogSlugs = ["2026-08-15", "2026-08-14"];
