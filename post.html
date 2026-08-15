@@ -32,6 +32,9 @@
     class="font-rounded text-[#334155] bg-[#f0f9ff] min-h-screen py-10 px-4 antialiased"
   >
     <main class="max-w-[680px] mx-auto">
+      <!-- 共通ヘッダー読み込みエリア -->
+      <div id="header-container"></div>
+
       <article
         class="bg-white/90 backdrop-blur-sm border border-[#e0f2fe] rounded-3xl p-6 sm:p-10 shadow-sm"
       >
@@ -68,6 +71,9 @@
         </div>
       </article>
     </main>
+
+    <!-- ヘッダー挿入用スクリプト -->
+    <script src="./js/header.js"></script>
 
     <script type="module">
       import { parseMyText } from "./js/parser.js";
@@ -125,18 +131,21 @@
           }
 
           const bodyContainer = document.getElementById("post-body");
+          // post.html の 111行目〜126行目あたり
           if (post.question) {
-            let html = `<div class="bg-[#f0f9ff] p-5 rounded-2xl border border-[#bae6fd] mb-6">
-                      <span class="text-xs font-bold text-[#0284c7] bg-white px-2 py-1 rounded-md mb-2 inline-block">問題</span>
-                      <div>${parseMyText(post.question)}</div>
-                      ${createTapeImageHtml(imageSrc, post.title)}
-                    </div>`;
+            let html = `<div class="bg-[#f0f9ff] p-5 rounded-2xl border border-[#bae6fd] mb-6 min-h-[60vh] flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-bold text-[#0284c7] bg-white px-2 py-1 rounded-md mb-2 inline-block">問題</span>
+              <div>${parseMyText(post.question)}</div>
+            </div>
+            ${createTapeImageHtml(imageSrc, post.title)}
+          </div>`;
 
             if (post.answer) {
               html += `<div class="bg-white p-5 rounded-2xl border border-[#e0f2fe] shadow-sm">
-                     <span class="text-xs font-bold text-[#0369a1] bg-[#e0f2fe] px-2 py-1 rounded-md mb-2 inline-block">答え・解説</span>
-                     <div>${parseMyText(post.answer)}</div>
-                   </div>`;
+           <span class="text-xs font-bold text-[#0369a1] bg-[#e0f2fe] px-2 py-1 rounded-md mb-2 inline-block">答え・解説</span>
+           <div>${parseMyText(post.answer)}</div>
+         </div>`;
             }
             bodyContainer.innerHTML = html;
           } else {
