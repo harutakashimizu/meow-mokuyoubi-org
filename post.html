@@ -125,10 +125,10 @@
           }
 
           const bodyContainer = document.getElementById("post-body");
-          if (post.problem) {
+          if (post.question) {
             let html = `<div class="bg-[#f0f9ff] p-5 rounded-2xl border border-[#bae6fd] mb-6">
                       <span class="text-xs font-bold text-[#0284c7] bg-white px-2 py-1 rounded-md mb-2 inline-block">問題</span>
-                      <div>${parseMyText(post.problem)}</div>
+                      <div>${parseMyText(post.question)}</div>
                       ${createTapeImageHtml(imageSrc, post.title)}
                     </div>`;
 
@@ -178,7 +178,7 @@
 
           const navContainer = document.getElementById("post-nav");
           if (navContainer) {
-            let navHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">`;
+            let navHtml = `<div class="grid grid-cols-2 gap-3 mb-6">`;
             if (prevPost) {
               navHtml += `
             <a href="./post.html?id=${prevPost.slug}" class="flex flex-col p-4 bg-[#f0f9ff] hover:bg-[#e0f2fe] border border-[#bae6fd] rounded-2xl transition-all duration-200 group">

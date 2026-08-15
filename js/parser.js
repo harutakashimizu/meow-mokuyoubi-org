@@ -22,6 +22,12 @@ export function parseMyText(text) {
         '<li class="ml-5 list-disc text-[#475569] my-1">$1</li>',
       )
 
+      // 連続する <li> を1つの <ul> で丸ごと囲むにゃん♫
+      .replace(
+        /((?:<li.*?>.*?<\/li>\n?)+)/g,
+        '<ul class="my-4 space-y-1 bg-[#f8fafc] p-4 rounded-xl">$1</ul>',
+      )
+
       // 3. 太字 (**文字**)
       .replace(
         /\*\*(.*?)\*\*/g,
@@ -40,13 +46,13 @@ export function parseMyText(text) {
         '<img src="$2" alt="$1" class="w-full max-w-[600px] max-h-[350px] object-contain rounded-2xl my-4 shadow-sm border border-[#e0f2fe]" loading="lazy">',
       )
 
-      // 6. 改行
-      .replace(/\n/g, "<br>")
-
-      // 箇条書き補正
+      // 6. URLの自動リンク化（追加したにゃん♫）
       .replace(
-        /(<li.*?>.*?<\/li>)/gs,
-        '<ul class="my-4 space-y-1 bg-[#f8fafc] p-4 rounded-xl">$1</ul>',
+        /(?<!src=")(https?:\/\/[^\s<]+)/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-[#0284c7] underline hover:text-[#0369a1]">$1</a>',
       )
+
+      // 7. 最後に改行を <br> にする
+      .replace(/(?<!>)\n/g, "<br>")
   );
 }
