@@ -1,4 +1,17 @@
 // js/header.js
+
+// ファビコンを動的にセットする関数だにゃ！
+function setFavicon() {
+  // すでにファビコンのタグがあればそれを使うし、なければ新しく作っておもちゃ箱(<head>)に入れるにゃ！
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "icon";
+    document.head.appendChild(link);
+  }
+  link.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230284c7'/></svg>";
+}
+
 async function loadHeader() {
   const container = document.getElementById("header-container");
   if (!container) return;
@@ -66,4 +79,7 @@ function initScrollHeader() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", loadHeader);
+document.addEventListener("DOMContentLoaded", () => {
+  setFavicon(); // ファビコンのセットだにゃ♫
+  loadHeader(); // ヘッダーの読み込みだにゃ♫
+});
