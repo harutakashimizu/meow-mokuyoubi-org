@@ -1,5 +1,5 @@
 window.currentPost = {
-  title: "40人のクラスで誕生日が被る確率",
+  title: "クラスで誕生日がかぶる確率",
   date: "2026.08.14",
   image: "birthday.png",
   question: `
