@@ -1,3 +1,3 @@
 // posts/index.js
 
-window.blogSlugs = ["1", "2", "3", "about"];
+window.blogSlugs = ["5", "4", "3", "2", "1", "about"];
