@@ -1,3 +1,5 @@
+// js/parser.js
+
 export function parseMyText(text) {
   if (!text) return "";
 

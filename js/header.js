@@ -1,15 +1,22 @@
 // js/header.js
 
-// ファビコンを動的にセットする関数だにゃ！
+// ファビコンを Tailwind Config の brand.primary 色と連動して動的にセットする関数だにゃ！
 function setFavicon() {
-  // すでにファビコンのタグがあればそれを使うし、なければ新しく作っておもちゃ箱(<head>)に入れるにゃ！
   let link = document.querySelector("link[rel~='icon']");
   if (!link) {
     link = document.createElement("link");
     link.rel = "icon";
     document.head.appendChild(link);
   }
-  link.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230284c7'/></svg>";
+
+  // tailwind.config の brand.primary の色を取得（取れなかったらデフォルトの青にするにゃ）
+  const primaryColor =
+    window.tailwind?.config?.theme?.extend?.colors?.brand?.primary || "#0284c7";
+
+  // URLエンコード用に '#' を '%23' に変換するにゃ
+  const encodedColor = encodeURIComponent(primaryColor);
+
+  link.href = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='${encodedColor}'/></svg>`;
 }
 
 async function loadHeader() {
@@ -35,7 +42,6 @@ function initScrollHeader() {
 
   if (!header || !title || !subtitle || !container) return;
 
-  // 固定ヘッダーの高さ分、コンテンツが下にズレるようにスペーサーの高さを確保するにゃ
   const updateSpacerHeight = () => {
     container.style.paddingTop = `${header.offsetHeight}px`;
   };
@@ -44,29 +50,26 @@ function initScrollHeader() {
   window.addEventListener("resize", updateSpacerHeight);
 
   window.addEventListener("scroll", () => {
-    // 20px以上スクロールされたら縮小モードにするにゃ
     if (window.scrollY > 20) {
       header.classList.remove("py-4");
       header.classList.add(
         "py-2",
         "shadow-sm",
         "border-b",
-        "border-[#bae6fd]/50",
+        "border-brand-border/50",
       );
 
       title.classList.remove("text-4xl", "sm:text-5xl");
       title.classList.add("text-2xl");
 
-      // サブタイトルをすっと消すにゃ
       subtitle.classList.remove("max-h-10", "opacity-100", "mt-0");
       subtitle.classList.add("max-h-0", "opacity-0");
     } else {
-      // 一番上に戻ったら元通りにするにゃ
       header.classList.remove(
         "py-2",
         "shadow-sm",
         "border-b",
-        "border-[#bae6fd]/50",
+        "border-brand-border/50",
       );
       header.classList.add("py-4");
 

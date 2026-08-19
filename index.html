@@ -14,22 +14,11 @@
     />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              rounded: ["'M PLUS Rounded 1c'", "sans-serif"],
-              pop: ["Fredoka", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+    <script src="./js/tailwind.config.js"></script>
   </head>
 
   <body
-    class="font-rounded text-[#334155] bg-[#f0f9ff] min-h-screen py-12 px-6 antialiased"
+    class="font-rounded text-brand-text bg-brand-bg min-h-screen py-12 px-6 antialiased"
   >
     <main class="max-w-[680px] mx-auto">
       <!-- 共通ヘッダー読み込みエリア -->
@@ -37,7 +26,7 @@
 
       <!-- 記事一覧カード -->
       <div id="post-list" class="flex flex-col gap-6">
-        <p class="text-[#94a3b8] text-sm text-center py-8">loading...</p>
+        <p class="text-brand-muted text-sm text-center py-8">loading...</p>
       </div>
     </main>
 
@@ -45,16 +34,16 @@
     <script src="./js/header.js"></script>
 
     <script type="module">
-      // 一覧プレビュー用のテキストお掃除関数（HTMLタグやMarkdown記法を綺麗に除去するにゃ！）
+      // 一覧プレビュー用のテキストお掃除関数
       const createPlainTextPreview = (text) => {
         if (!text) return "";
         return text
-          .replace(/\[js:.*?\]/g, "") // [js:...] タグ除去
-          .replace(/!\[.*?\]\(.*?\)/g, "") // Markdown画像除去
-          .replace(/^#+\s+/gm, "") // 見出し記号除去
-          .replace(/\*\*(.*?)\*\*/g, "$1") // 太字記号除去
-          .replace(/^\*\s+/gm, "") // 箇条書き記号除去
-          .replace(/<[^>]*>/g, "") // HTMLタグ除去
+          .replace(/\[js:.*?\]/g, "")
+          .replace(/!\[.*?\]\(.*?\)/g, "")
+          .replace(/^#+\s+/gm, "")
+          .replace(/\*\*(.*?)\*\*/g, "$1")
+          .replace(/^\*\s+/gm, "")
+          .replace(/<[^>]*>/g, "")
           .trim();
       };
 
@@ -67,7 +56,7 @@
 
         if (slugs.length === 0) {
           container.innerHTML =
-            '<p class="text-[#94a3b8] text-center">まだ記事がないよん</p>';
+            '<p class="text-brand-muted text-center">まだ記事がないよん</p>';
           return;
         }
 
@@ -82,7 +71,6 @@
               const isQuestion = !!raw.question;
               const rawText = isQuestion ? raw.question : raw.content || "";
 
-              // プレビュー用の純粋なテキストを作成するにゃ
               const previewText = createPlainTextPreview(rawText);
 
               let imageSrc = null;
@@ -112,22 +100,22 @@
         container.innerHTML = posts
           .map(
             (post) => `
-<a href="./post.html?id=${post.slug}" class="group block p-6 bg-white border-[#f0f9ff] rounded-2xl transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[6px_6px_0px_#bae6fd] hover:border-[#7dd3fc]">
-  <span class="text-sm text-[#0284c7] tracking-wider block mb-1 font-semibold">${post.date}</span>
-  <h2 class="text-xl font-bold text-[#1e293b] mb-2">${post.title}</h2>
+<a href="./post.html?id=${post.slug}" class="group block p-6 bg-brand-card border-brand-light rounded-2xl transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-pop-card hover:border-brand-sub">
+  <span class="text-sm text-brand-primary tracking-wider block mb-1 font-semibold">${post.date}</span>
+  <h2 class="text-xl font-bold text-brand-darkText mb-2">${post.title}</h2>
   
   <!-- 文章エリア（プレビュー用プレーンテキスト） -->
-  <p class="text-base text-[#64748b] leading-relaxed mb-3 line-clamp-3 whitespace-pre-wrap">${post.previewText}</p>
+  <p class="text-base text-brand-bodyText leading-relaxed mb-3 line-clamp-3 whitespace-pre-wrap">${post.previewText}</p>
 
 ${
   post.image
     ? `
         <div class="my-6 text-center">
           <div class="relative inline-block mx-auto">
-            <div class="absolute -top-3 -left-3 w-16 h-6 bg-[#38bdf8]/70 rotate-[-15deg] rounded-sm z-10"></div>
-            <div class="absolute -bottom-3 -right-3 w-16 h-6 bg-[#fb923c]/70 rotate-[-15deg] rounded-sm z-10"></div>
+            <div class="absolute -top-3 -left-3 w-16 h-6 bg-brand-sub/70 rotate-[-15deg] rounded-sm z-10"></div>
+            <div class="absolute -bottom-3 -right-3 w-16 h-6 bg-brand-accent/70 rotate-[-15deg] rounded-sm z-10"></div>
 
-            <div class="bg-white p-1.5 border border-[#e2e8f0] rounded-sm shadow-[4px_4px_0px_#bae6fd]">
+            <div class="bg-brand-card p-1.5 border border-slate-200 rounded-sm shadow-pop-photo">
                <img src="${post.image}" alt="${post.title}" class="max-h-[220px] w-auto object-contain" loading="lazy">
             </div>
           </div>
@@ -137,7 +125,7 @@ ${
 }
 
 <!-- ボタン -->
-<span class="inline-flex items-center text-sm font-bold text-white bg-[#0284c7]/40 px-3.5 py-2 rounded-full transition-all duration-200 group-hover:bg-[#0284c7]/80">
+<span class="inline-flex items-center text-sm font-bold text-white bg-brand-primary/40 px-3.5 py-2 rounded-full transition-all duration-200 group-hover:bg-brand-primary/80">
     ${post.isQuestion ? (post.hasAnswer ? "答え・解説はこちら →" : "問題を見る →") : "続きを読む →"}
   </span>
 </a>
