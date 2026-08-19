@@ -1,6 +1,6 @@
 // js/header.js
 
-// ファビコンを Tailwind Config の brand.primary 色と連動して動的にセットする関数だにゃ！
+// ファビコンを Tailwind Config の primary 色と連動して動的にセットする関数
 function setFavicon() {
   let link = document.querySelector("link[rel~='icon']");
   if (!link) {
@@ -9,7 +9,7 @@ function setFavicon() {
     document.head.appendChild(link);
   }
 
-  // tailwind.config の brand.primary の色を取得（取れなかったらデフォルトの青にするにゃ）
+  // tailwind.config の primary の色を取得（取れなかったらデフォルトの青にする）
   const primaryColor = window.tailwind?.config?.theme?.extend?.colors?.primary;
 
   // URLエンコード用に '#' を '%23' に変換するにゃ

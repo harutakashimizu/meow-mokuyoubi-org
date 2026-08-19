@@ -23,8 +23,8 @@ tailwind.config = {
         border: "#bae6fd", // ポップな影・枠線用カラー
       },
       boxShadow: ({ theme }) => ({
-        "pop-card": `6px 6px 0px ${theme("colors.brand.border")}`,
-        "pop-photo": `4px 4px 0px ${theme("colors.brand.border")}`,
+        "pop-card": `6px 6px 0px ${theme("colors.border")}`,
+        "pop-photo": `4px 4px 0px ${theme("colors.border")}`,
       }),
     },
   },
