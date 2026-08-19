@@ -10,8 +10,7 @@ function setFavicon() {
   }
 
   // tailwind.config の brand.primary の色を取得（取れなかったらデフォルトの青にするにゃ）
-  const primaryColor =
-    window.tailwind?.config?.theme?.extend?.colors?.brand?.primary || "#0284c7";
+  const primaryColor = window.tailwind?.config?.theme?.extend?.colors?.primary;
 
   // URLエンコード用に '#' を '%23' に変換するにゃ
   const encodedColor = encodeURIComponent(primaryColor);
@@ -52,12 +51,7 @@ function initScrollHeader() {
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
       header.classList.remove("py-4");
-      header.classList.add(
-        "py-2",
-        "shadow-sm",
-        "border-b",
-        "border-brand-border/50",
-      );
+      header.classList.add("py-2", "shadow-sm", "border-b", "border-border/50");
 
       title.classList.remove("text-4xl", "sm:text-5xl");
       title.classList.add("text-2xl");
@@ -69,7 +63,7 @@ function initScrollHeader() {
         "py-2",
         "shadow-sm",
         "border-b",
-        "border-brand-border/50",
+        "border-border/50",
       );
       header.classList.add("py-4");
 
